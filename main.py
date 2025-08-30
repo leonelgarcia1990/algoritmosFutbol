@@ -23,10 +23,9 @@ def main():
     # Mostrar la lista de equipos
     mostrar_equipos(equipos)
    
-   #test - muesto en pantalla goles  
+   #test - muesto en pantalla goles sin formato 
     goles = matriz_goles(equipos)
     print(goles)
-    
     
 # **************************** LLAMADO A FUNCION MAIN **************************
 
