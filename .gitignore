@@ -52,3 +52,5 @@ config.local.py
 # Archivos de base de datos
 *.db
 *.sqlite3
+.DS_Store
+.DS_Store
