@@ -27,6 +27,8 @@ def main():
     goles = matriz_goles(equipos)
     print(goles)
     
+    fixture = generar_fixture(equipos)
+    mostrar_fixture(fixture)
 # **************************** LLAMADO A FUNCION MAIN **************************
 
 main()
