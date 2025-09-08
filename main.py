@@ -9,6 +9,8 @@ from random import randint
 from obtener_equipos import obtener_equipos
 from mostrar_equipos import mostrar_equipos
 from matriz_goles import matriz_goles
+from generar_fixture import generar_fixture
+from mostrar_fixture import mostrar_fixture
 # ***************************** VARIABLES GLOBALES *****************************
 CANTIDAD_EQUIPOS = 20
 goles = []
@@ -27,6 +29,7 @@ def main():
     goles = matriz_goles(equipos)
     print(goles)
     
+    #generacion de fixture y print
     fixture = generar_fixture(equipos)
     mostrar_fixture(fixture)
 # **************************** LLAMADO A FUNCION MAIN **************************
