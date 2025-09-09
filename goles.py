@@ -34,22 +34,28 @@ def simular_torneo(fixture, equipos):
 
     print("\n--- INICIO DE LA SIMULACIÓN DE PARTIDOS ---")
 
+
+    # Definimos el ancho total del bloque de texto
+
+    ANCHO_TOTAL = 40
+
     for fecha_num, fecha in enumerate(fixture):
-        print(f"\n--- FECHA {fecha_num + 1} ---")
-        
+    # Centrar el título de la fecha
+        titulo = f"--- FECHA {fecha_num + 1} ---"
+        print("\n" + titulo.center(ANCHO_TOTAL))
+
         for equipo1, equipo2 in fecha:
             goles1 = simular_goles()
             goles2 = simular_goles()
 
-            # Usamos el método index() para obtener el índice de cada equipo
             idx1 = equipos.index(equipo1)
             idx2 = equipos.index(equipo2)
 
-            # Asignamos los goles a la matriz usando los índices
             matriz_goles_a_favor[idx1][fecha_num] = goles1
             matriz_goles_a_favor[idx2][fecha_num] = goles2
-            
-            print(f"{equipo1} {goles1} - {goles2} {equipo2}")
+
+            # Formateo alineado: nombres a la izquierda/derecha, goles centrados
+            print(f"{equipo1:<15} {goles1:^3} - {goles2:^3} {equipo2:>15}")
 
     print("\n--- FIN DE LA SIMULACIÓN ---")
     
