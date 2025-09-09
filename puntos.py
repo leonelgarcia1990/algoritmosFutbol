@@ -1,27 +1,17 @@
 def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
     """
     Asigna puntos a cada equipo basándose en los resultados de la simulación.
-
-    Args:
-        fixture (list): El calendario de partidos del torneo.
-        equipos (list): La lista de equipos participantes.
-        matriz_goles_a_favor (list): La matriz con los goles a favor de cada equipo.
-
-    Returns:
-        dict: Un diccionario donde la clave es el nombre del equipo y el valor es su puntaje total.
     """
     # Inicializamos un diccionario para guardar los puntos de cada equipo.
     puntos = {equipo: 0 for equipo in equipos}
-    
-    # Creamos un mapeo de equipos a índices para acceder a la matriz.
-    mapeo_equipos = {equipo: i for i, equipo in enumerate(equipos)}
     
     # Recorremos cada fecha y cada partido del fixture.
     for fecha_num, fecha in enumerate(fixture):
         for equipo1, equipo2 in fecha:
             # Obtenemos los índices de los equipos.
-            idx1 = mapeo_equipos[equipo1]
-            idx2 = mapeo_equipos[equipo2]
+            # Usamos el método index() para encontrar la posición del equipo.
+            idx1 = equipos.index(equipo1)
+            idx2 = equipos.index(equipo2)
             
             # Consultamos los goles de la matriz ya generada.
             goles_equipo1 = matriz_goles_a_favor[idx1][fecha_num]
@@ -38,6 +28,7 @@ def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
                 
     return puntos
 
+#funcion para imprimir tabla de puntos
 
 def imprimir_tabla_puntos(puntos_torneo):
     """
