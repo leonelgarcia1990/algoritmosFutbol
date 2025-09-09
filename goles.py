@@ -69,14 +69,12 @@ def calcular_matriz_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
     # Inicializamos la matriz de goles en contra con ceros.
     matriz_goles_en_contra = inicializar_matriz_resultados()
     
-    # Usamos el mapeo de equipos para encontrar los índices.
-    mapeo_equipos = {equipo: i for i, equipo in enumerate(equipos)}
-    
     for fecha_num, fecha in enumerate(fixture):
         for equipo1, equipo2 in fecha:
-            # Obtenemos los índices de ambos equipos.
-            idx1 = mapeo_equipos[equipo1]
-            idx2 = mapeo_equipos[equipo2]
+            # Obtenemos los índices de ambos equipos usando el método .index().
+            # Este método recorre la lista `equipos` para encontrar la posición de cada nombre.
+            idx1 = equipos.index(equipo1)
+            idx2 = equipos.index(equipo2)
             
             # Los goles en contra de un equipo son los goles a favor del rival.
             goles_en_contra_equipo1 = matriz_goles_a_favor[idx2][fecha_num]
