@@ -90,11 +90,11 @@ def calcular_matriz_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
 
 
 
-def imprimir_matriz(matriz, equipos):
+def imprimir_matriz_favor(matriz, equipos):
     """
-    Imprime una matriz de goles con etiquetas de equipo y fecha para su fácil visualización.
+    Imprime una matriz de goles a favorcon etiquetas de equipo y fecha para su fácil visualización.
     """
-    print("           ", end="")
+    print("Goles a Favor", end=" ")
     for i in range(NUMERO_FECHAS):
         print(f"Fecha{i+1:2d}", end=" ")
     print()
@@ -103,7 +103,24 @@ def imprimir_matriz(matriz, equipos):
         nombre_equipo = equipos[i]
         print(f"{nombre_equipo:10}", end="")
         for j in range(NUMERO_FECHAS):
-            print(f"{matriz[i][j]:>6}", end=" ")
+            print(f"{matriz[i][j]:>7}", end=" ")
+        print()
+
+
+def imprimir_matriz_contra(matriz, equipos):
+    """
+    Imprime una matriz de goles en contracon etiquetas de equipo y fecha para su fácil visualización.
+    """
+    print("Goles Recibidos", end=" ")
+    for i in range(NUMERO_FECHAS):
+        print(f"Fecha{i+1:2d}", end=" ")
+    print()
+    
+    for i in range(NUMERO_EQUIPOS):
+        nombre_equipo = equipos[i]
+        print(f"{nombre_equipo:10}", end="")
+        for j in range(NUMERO_FECHAS):
+            print(f"{matriz[i][j]:>7}", end=" ")
         print()
 
 
