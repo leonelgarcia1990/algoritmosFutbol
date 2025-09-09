@@ -2,36 +2,63 @@
 
 # ********************************** IMPORT FUNCIONES PYTHON********************
 
-from random import randint
-
 # ********************************** IMPORT FUNCIONES PROPIAS ******************
 
-from obtener_equipos import obtener_equipos
-from mostrar_equipos import mostrar_equipos
-from matriz_goles import matriz_goles
+from ingreso_equipos import obtener_equipos
+from ingreso_equipos import listar_equipos
+
 from generar_fixture import generar_fixture
-from mostrar_fixture import mostrar_fixture
-# ***************************** VARIABLES GLOBALES *****************************
-CANTIDAD_EQUIPOS = 20
-goles = []
+
+from goles import simular_torneo
+from goles import calcular_matriz_goles_en_contra
+from goles import calcular_diferencia_de_goles
+from goles import imprimir_matriz
+from goles import imprimir_resumen_goles
+
+from puntos import calcular_puntos
+from puntos import imprimir_tabla_puntos
+
+
+
 # ***************************** FUNCION MAIN ***********************************
 def main():
+    
+    print("==========================================")
     print("SISTEMA DE GESTIÓN DE EQUIPOS DE FÚTBOL")
-    print("======================================")
+    print("==========================================")
     
     # Obtener la lista de equipos
-    equipos = obtener_equipos()
+    lista_equipos = obtener_equipos()
     
     # Mostrar la lista de equipos
-    mostrar_equipos(equipos)
-   
-   #test - muesto en pantalla goles sin formato 
-    goles = matriz_goles(equipos)
-    print(goles)
+    listar_equipos(lista_equipos)
     
     #generacion de fixture y print
-    fixture = generar_fixture(equipos)
-    mostrar_fixture(fixture)
+    fixture = generar_fixture(lista_equipos)
+
+    
+    goles_a_favor = simular_torneo(fixture, lista_equipos)
+    
+    goles_en_contra = calcular_matriz_goles_en_contra(fixture,lista_equipos,goles_a_favor)
+    
+    #solo para ver como se genera la matriz
+    imprimir_matriz(goles_a_favor, lista_equipos)
+        
+    #solo para ver como se genera la matriz
+    imprimir_matriz(goles_en_contra, lista_equipos)
+    
+    diferencia_total = calcular_diferencia_de_goles(lista_equipos, goles_a_favor, goles_en_contra)
+
+    #solo para ver como se genera la lista
+    imprimir_resumen_goles(lista_equipos, diferencia_total)
+    
+    puntos_torneo = calcular_puntos(fixture, lista_equipos, goles_a_favor)
+    
+    #solo para ver como se genera la lista
+    imprimir_tabla_puntos(puntos_torneo)
+    
+    
+  
 # **************************** LLAMADO A FUNCION MAIN **************************
 
 main()
