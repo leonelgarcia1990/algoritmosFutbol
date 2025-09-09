@@ -37,7 +37,9 @@ def imprimir_tabla_puntos(puntos_torneo):
     Args:
         puntos_torneo (dict): Diccionario con los puntos de cada equipo.
     """
-    print("\n--- TABLA DE POSICIONES ---")
+    print("\n" + f"{'--- TABLA DE POSICIONES ---':^37}")
+    print(f"{'Equipo':^20}  {'Puntos':^6}")
+
     
    
     lista_puntos = list(puntos_torneo.items())
@@ -51,5 +53,12 @@ def imprimir_tabla_puntos(puntos_torneo):
 
     # 3. Imprimir la lista ordenada.
     for equipo, puntaje in lista_puntos:
-        print(f"{equipo:<15} Puntos: {puntaje}")
+        print(f"{equipo[:20]:^20}  {puntaje:^6}")
+
+    
+    # Mensaje al campeón (primer lugar de la tabla)
+    campeon, puntos = lista_puntos[0]
+    
+    print("\nFELICITACIONES", campeon.upper(), "!!!")
+    print(f"Se consagra campeón con {puntos} puntos.")
 

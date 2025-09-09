@@ -172,5 +172,3 @@ def imprimir_resumen_goles(equipos, diferencia_goles):
         print(f"{equipo:<15} {diferencia}")
     
     print("-----------------------------------")
-
-
