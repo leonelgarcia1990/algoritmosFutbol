@@ -14,10 +14,6 @@ def generar_fixture(equipos):
         print("Error: Se requieren exactamente 20 equipos.")
         return []
 
-    # Si la cantidad de equipos es impar, agregamos un "descanso"
-    if len(equipos) % 2 != 0:
-        equipos.append("Descanso")
-
     n = len(equipos)
     fixture = []  # Lista que contendrá las 19 fechas
 
