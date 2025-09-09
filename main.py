@@ -43,10 +43,10 @@ def main():
     goles_en_contra = calcular_matriz_goles_en_contra(fixture,lista_equipos,goles_a_favor)
     
     #solo para ver como se genera la matriz
-    imprimir_matriz_favor(goles_a_favor, lista_equipos)
+  #  imprimir_matriz_favor(goles_a_favor, lista_equipos)
         
     #solo para ver como se genera la matriz
-    imprimir_matriz_contra(goles_en_contra, lista_equipos)
+   # imprimir_matriz_contra(goles_en_contra, lista_equipos)
     
     diferencia_total = calcular_diferencia_de_goles(lista_equipos, goles_a_favor, goles_en_contra)
 
