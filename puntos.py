@@ -48,8 +48,7 @@ def imprimir_tabla_puntos(puntos_torneo):
     """
     print("\n--- TABLA DE POSICIONES ---")
     
-    # 1. Convertir el diccionario a una lista de tuplas (equipo, puntaje).
-    #    Por ejemplo: [('Equipo A', 6), ('Equipo C', 4), ...]
+   
     lista_puntos = list(puntos_torneo.items())
 
     # 2. Ordenar la lista.
@@ -63,8 +62,3 @@ def imprimir_tabla_puntos(puntos_torneo):
     for equipo, puntaje in lista_puntos:
         print(f"{equipo:<15} Puntos: {puntaje}")
 
-# Ejemplo de uso
-# Suponiendo que 'puntos_torneo' es un diccionario ya calculado, por ejemplo:
-# puntos_torneo = {'Equipo A': 6, 'Equipo B': 1, 'Equipo C': 4, 'Equipo D': 1}
-# Si llamas a la función con este diccionario:
-# imprimir_tabla_posiciones(puntos_torneo)
