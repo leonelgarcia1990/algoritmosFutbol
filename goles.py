@@ -4,6 +4,8 @@ from random import choices
 NUMERO_EQUIPOS = 20
 NUMERO_FECHAS = 19
 
+# Función para simular goles en un partido
+
 def simular_goles():
     """Simula y devuelve un solo valor de goles."""
     valores_goles = [0, 1, 2, 3, 4, 5]
