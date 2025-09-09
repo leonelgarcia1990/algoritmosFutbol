@@ -115,7 +115,7 @@ def imprimir_matriz_favor(matriz, equipos):
 
 def imprimir_matriz_contra(matriz, equipos):
     """
-    Imprime una matriz de goles en contracon etiquetas de equipo y fecha para su fácil visualización.
+    Imprime una matriz de goles en contra con etiquetas de equipo y fecha para su fácil visualización.
     """
     print("Goles Recibidos", end=" ")
     for i in range(NUMERO_FECHAS):
@@ -159,22 +159,29 @@ def calcular_diferencia_de_goles(equipos, matriz_goles_a_favor, matriz_goles_en_
 
 
 
-def imprimir_resumen_goles(equipos, diferencia_goles):
+def imprimir_resumen_goles(equipos, matriz_goles_a_favor, matriz_goles_en_contra):
     """
-    Imprime la lista de equipos y su diferencia de goles.
-    
-    Args:
-        equipos (list): La lista de equipos.
-        diferencia_goles (dict): Un diccionario con la diferencia de goles de cada equipo.
+    Imprime el resumen de goles por equipo.
     """
-    print("\n--- RESUMEN DE GOLES POR EQUIPO ---")
-    print("-----------------------------------")
-    
-    # Recorremos la lista de equipos para asegurar un orden consistente.
-    for equipo in equipos:
-        # Obtenemos la diferencia de goles del diccionario.
-        diferencia = diferencia_goles[equipo]
-        # Imprimimos el nombre del equipo y su diferencia de goles.
-        print(f"{equipo:<15} {diferencia}")
-    
-    print("-----------------------------------")
+    ancho_total = 50 # Definimos el ancho total 
+    titulo = f'--- RESUMEN DE GOLES POR EQUIPO ---'
+    print("\n" + titulo.center(ancho_total))
+    print("--------------------------------------------------")
+    print(f"{'Goles Recibidos':<17} {'Equipo':^15} {'Goles a Favor':>15}")
+    print("--------------------------------------------------")
+
+    for i in range(len(equipos)):
+        equipo = equipos[i]
+
+        # Calculamos goles a favor
+        gf_total = 0
+        for gol in matriz_goles_a_favor[i]:
+            gf_total += gol
+
+        # Calculamos goles en contra
+        gc_total = 0
+        for gol in matriz_goles_en_contra[i]:
+            gc_total += gol
+
+        print(f"{gc_total:<17} {equipo:^15} {gf_total:>15}")
+    print("--------------------------------------------------")

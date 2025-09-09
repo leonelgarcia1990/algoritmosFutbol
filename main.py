@@ -51,7 +51,7 @@ def main():
     diferencia_total = calcular_diferencia_de_goles(lista_equipos, goles_a_favor, goles_en_contra)
 
     #solo para ver como se genera la lista
-    imprimir_resumen_goles(lista_equipos, diferencia_total)
+    imprimir_resumen_goles(lista_equipos, matriz_goles_a_favor=goles_a_favor, matriz_goles_en_contra=goles_en_contra)
     
     puntos_torneo = calcular_puntos(fixture, lista_equipos, goles_a_favor)
     
