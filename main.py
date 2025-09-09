@@ -15,6 +15,7 @@ from goles import calcular_diferencia_de_goles
 from goles import imprimir_matriz_favor
 from goles import imprimir_matriz_contra
 from goles import imprimir_resumen_goles
+from goles import imprimir_rankings
 
 from puntos import calcular_puntos
 from puntos import imprimir_tabla_puntos
@@ -52,6 +53,8 @@ def main():
 
     #solo para ver como se genera la lista
     imprimir_resumen_goles(lista_equipos, matriz_goles_a_favor=goles_a_favor, matriz_goles_en_contra=goles_en_contra)
+
+    imprimir_rankings(lista_equipos, matriz_goles_a_favor=goles_a_favor, matriz_goles_en_contra=goles_en_contra)
     
     puntos_torneo = calcular_puntos(fixture, lista_equipos, goles_a_favor)
     
