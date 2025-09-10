@@ -6,14 +6,9 @@ def generar_fixture(equipos):
     
     - Cada equipo juega contra todos los demás una sola vez.
     - Se organiza en 19 fechas.
-    - Cada partido se guarda como una tupla (equipo_local, equipo_visitante).
+    
     - Devuelve una lista de listas: fixture[fecha] -> lista de partidos.
     """
-
-    # Validación: deben ser 20 equipos
-    if len(equipos) != 20:
-        print("Error: Se requieren exactamente 20 equipos.")
-        return []
 
     n = len(equipos)
     fixture = []

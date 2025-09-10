@@ -1,15 +1,11 @@
-
 def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
     """
-    Calcula solo los puntos de cada equipo y los devuelve en una lista.
+    Calcula solo los puntos de cada equipo y los devuelve en una lista,
+    usando la matriz de goles a favor.
     """
     num_equipos = len(equipos)
 
-    # Creamos una lista para almacenar los puntos de cada equipo.
-    puntos = []
-    # Usamos 'i' como una variable simple de conteo.
-    for i in range(num_equipos):
-        puntos.append(0)
+    puntos = [0] * num_equipos
 
     # Recorremos cada fecha del torneo.
     for fecha_num in range(len(fixture)):
@@ -20,59 +16,50 @@ def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
             equipo1 = partido[0]
             equipo2 = partido[1]
 
-            # Obtenemos los índices de los equipos.
             idx1 = equipos.index(equipo1)
             idx2 = equipos.index(equipo2)
 
-            # Obtenemos los goles anotados por cada equipo en el partido actual.
             goles_eq1 = matriz_goles_a_favor[idx1][fecha_num]
             goles_eq2 = matriz_goles_a_favor[idx2][fecha_num]
 
-            # Asignamos los puntos basados en el resultado.
             if goles_eq1 > goles_eq2:
-                puntos[idx1] += 3  # Victoria: 3 puntos
+                puntos[idx1] += 3
             elif goles_eq2 > goles_eq1:
-                puntos[idx2] += 3  # Victoria: 3 puntos
+                puntos[idx2] += 3
             else:
-                puntos[idx1] += 1  # Empate: 1 punto
-                puntos[idx2] += 1  # Empate: 1 punto
+                puntos[idx1] += 1
+                puntos[idx2] += 1
 
     return puntos
 
-
 def imprimir_tabla_ordenada(equipos, puntos):
+    
+    # Se crea una copia de las listas para ordenarlas sin modificar las originales. Buena practica. 
+    equipos_ordenados = list(equipos)
+    puntos_ordenados = list(puntos)
 
-    # Paso 1: Combinar equipos y puntos para un ordenamiento más sencillo.
-    # Se crea una lista de listas, donde cada sublista es [puntos, nombre_equipo].
-    tabla = []
-    for i in range(len(equipos)):
-        tabla.append([puntos[i], equipos[i]])
-
-    # Paso 2: Ordenar la lista 'tabla'
-    # Se usa el algoritmo de ordenamiento de burbuja para ordenar por puntos de mayor a menor.
-    n = len(tabla)
+    # Algoritmo de ordenamiento de burbuja.
+    n = len(puntos_ordenados)
     for i in range(n - 1):
         for j in range(n - 1 - i):
-            if tabla[j][0] < tabla[j+1][0]:
-                tabla[j], tabla[j+1] = tabla[j+1], tabla[j]
+            if puntos_ordenados[j] < puntos_ordenados[j+1]:
+                # Se intercambian los puntos
+                puntos_ordenados[j], puntos_ordenados[j+1] = puntos_ordenados[j+1], puntos_ordenados[j]
+                # Se intercambian los equipos de la misma forma para mantener la relación
+                equipos_ordenados[j], equipos_ordenados[j+1] = equipos_ordenados[j+1], equipos_ordenados[j]
     
-    # Paso 3: Imprimir la tabla de posiciones
+    # Imprimir la tabla de posiciones
     print("\n" + "--- TABLA DE POSICIONES ---".center(40))
     print("-" * 40)
     print(f"{'Pos.':<5} {'Equipo':<20} {'Puntos':>10}")
     print("-" * 40)
     
-    # Se recorre la lista ya ordenada y se imprime cada fila de la tabla.
-    for i in range(len(tabla)):
+    for i in range(len(equipos_ordenados)):
         posicion = i + 1
-        equipo = tabla[i][1]
-        puntos_eq = tabla[i][0]
-        print(f"{posicion:<5} {equipo:<20} {puntos_eq:>10}")
+        equipo = equipos_ordenados[i]
+        puntos_equipo = puntos_ordenados[i]
+        print(f"{posicion:<5} {equipo:<20} {puntos_equipo:>10}")
     print("-" * 40)
-    
-    # Paso 4: Imprimir al campeón y su puntuación
-    campeon = tabla[0][1]
-    puntos_campeon = tabla[0][0]
-    
-    print("\n¡FELICITACIONES", campeon.upper(), "!!!")
-    print(f"Se consagra campeón con {puntos_campeon} puntos.")
+
+    campeon = equipos_ordenados[0]
+    print(f"\n¡El CAMPEÓN del torneo es {campeon}!")
