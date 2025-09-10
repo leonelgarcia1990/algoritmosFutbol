@@ -1,13 +1,12 @@
 
 def generar_fixture(equipos):
-    """
-    Genera el fixture de un campeonato todos contra todos (round-robin)
-    con 20 equipos y 19 fechas.
+
+    # Genera el fixture de un campeonato todos contra todos (round-robin)
+    # con 20 equipos y 19 fechas.
     
     - Cada equipo juega contra todos los demás una sola vez.
     - Se organiza en 19 fechas.
     
-    - Devuelve una lista de listas: fixture[fecha] -> lista de partidos.
     """
 
     n = len(equipos)
