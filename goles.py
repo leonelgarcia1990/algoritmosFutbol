@@ -46,54 +46,48 @@ def generar_fixture(equipos):
     return fixture
 
 def simular_torneo(fixture, equipos):
-   
+    """
+    Simula todos los partidos del torneo y guarda los goles a favor.
+    """
     matriz_goles_a_favor = inicializar_matriz_resultados()
-    
+
     print("\n--- INICIO DE LA SIMULACIÓN DE PARTIDOS ---")
-    
-    for fecha_num in range(NUMERO_FECHAS):
-        fecha = fixture[fecha_num]
-        print(f"\n--- FECHA {fecha_num + 1} ---")
-        for partido in fecha:
-            equipo_local = partido[0]
-            equipo_visitante = partido[1]
-            
+
+    ANCHO_TOTAL = 40
+
+    for fecha_num, fecha in enumerate(fixture):
+        titulo = f" FECHA {fecha_num + 1} ".center(ANCHO_TOTAL, "-")
+        print("\n" + titulo)
+
+        for equipo1, equipo2 in fecha:
             goles1 = simular_goles()
             goles2 = simular_goles()
-            
-            idx1 = equipos.index(equipo_local)
-            idx2 = equipos.index(equipo_visitante)
-            
+
+            idx1 = equipos.index(equipo1)
+            idx2 = equipos.index(equipo2)
+
             matriz_goles_a_favor[idx1][fecha_num] = goles1
             matriz_goles_a_favor[idx2][fecha_num] = goles2
-
-            # Se añade la diferencia de gol del partido
-            diferencia_gol_partido = goles1 - goles2
-
-            print(f"{equipo_local:<15} {goles1} - {goles2} {equipo_visitante:>15} (Dif: {diferencia_gol_partido:+})")
             
+            print(f"{equipo1:<15} {goles1:^3} - {goles2:^3} {equipo2:>15}")
+
+    print("\n" + "--- FIN DE LA SIMULACIÓN ---".center(ANCHO_TOTAL))
+    
     return matriz_goles_a_favor
 
 def calcular_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
-    
-   # Calcula y devuelve la matriz de goles en contra basándose en la matriz de goles a favor.
-   
+    """
+    Calcula y devuelve la matriz de goles en contra basándose en la matriz de goles a favor.
+    """
     num_equipos = len(equipos)
     num_fechas = len(fixture)
     
-    # Se corrige el nombre de la variable para evitar la confusión
-    matriz_goles_en_contra = []
-    for _ in range(num_equipos):
-        fila = []
-        for _ in range(num_fechas):
-            fila.append(0)
-        matriz_goles_en_contra.append(fila)
+    matriz_goles_en_contra = inicializar_matriz_resultados()
 
     for fecha_num in range(num_fechas):
         fecha = fixture[fecha_num]
         for partido in fecha:
-            equipo_local = partido[0]
-            equipo_visitante = partido[1]
+            equipo_local, equipo_visitante = partido
             
             idx1 = equipos.index(equipo_local)
             idx2 = equipos.index(equipo_visitante)
@@ -107,9 +101,9 @@ def calcular_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
     return matriz_goles_en_contra
 
 def calcular_diferencia_de_goles(equipos, matriz_goles_a_favor, goles_en_contra):
-    
-    #Calcula la diferencia de goles para cada equipo.
-    
+    """
+    Calcula la diferencia de goles para cada equipo.
+    """
     diferencia_goles = []
 
     for i in range(len(equipos)):
@@ -122,10 +116,10 @@ def calcular_diferencia_de_goles(equipos, matriz_goles_a_favor, goles_en_contra)
     return diferencia_goles
 
 def imprimir_matriz_favor(matriz, equipos):
-    
-    #Imprime una matriz de goles a favor con etiquetas de equipo y fecha.
-    
-    print("\n--- GOLES A FAVOR ---")
+    """
+    Imprime una matriz de goles a favor con etiquetas de equipo y fecha.
+    """
+    print("\n" + "--- GOLES A FAVOR ---".center(50))
     print("           ", end="")
     for i in range(NUMERO_FECHAS):
         print(f"Fecha{i+1:2d}", end=" ")
@@ -140,10 +134,10 @@ def imprimir_matriz_favor(matriz, equipos):
     print()
 
 def imprimir_matriz_contra(matriz, equipos):
-    
-    #Imprime una matriz de goles en contra con etiquetas de equipo y fecha.
-    
-    print("\n--- GOLES EN CONTRA ---")
+    """
+    Imprime una matriz de goles en contra con etiquetas de equipo y fecha.
+    """
+    print("\n" + "--- GOLES EN CONTRA ---".center(50))
     print("           ", end="")
     for i in range(NUMERO_FECHAS):
         print(f"Fecha{i+1:2d}", end=" ")
@@ -158,12 +152,20 @@ def imprimir_matriz_contra(matriz, equipos):
     print()
 
 def imprimir_resumen_goles(lista_equipos, goles_a_favor, goles_en_contra):
-    print("       --- RESUMEN DE GOLES POR EQUIPO ---        ")
-    print("--------------------------------------------------")
-    print("Equipo              Goles Favor    Goles Contra     Dif. Gol")
-    print("--------------------------------------------------")
+   
+    ancho_total = 60 
+    titulo = '--- RESUMEN DE GOLES POR EQUIPO ---'
+    print("\n" + titulo.center(ancho_total))
+    print("------------------------------------------------------------")
+    print(f"{'Equipo':<15} {'Goles Favor':^15} {'Goles Contra':^15} {'Dif. Gol':>15}")
+    print("------------------------------------------------------------")
+
     for i in range(len(lista_equipos)):
-        total_a_favor = sum(goles_a_favor[i])
-        total_en_contra = sum(goles_en_contra[i])
-        diferencia = total_a_favor - total_en_contra
-        print(f"{lista_equipos[i]:<20}{total_a_favor:<14}{total_en_contra:<16}{diferencia}")
+        equipo = lista_equipos[i]
+
+        gf_total = sum(goles_a_favor[i])
+        gc_total = sum(goles_en_contra[i])
+        dif_gol = gf_total - gc_total
+
+        print(f"{equipo:<15} {gf_total:^15} {gc_total:^15} {dif_gol:^15}")
+    print("------------------------------------------------------------")
