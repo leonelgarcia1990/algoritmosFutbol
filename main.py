@@ -8,9 +8,7 @@
 from ingreso_equipos import obtener_equipos, listar_equipos
 from generar_fixture import generar_fixture
 from goles import simular_torneo, calcular_goles_en_contra, imprimir_resumen_goles
-
-
-
+from puntos import imprimir_tabla_ordenada,calcular_puntos
 # ***************************** FUNCION MAIN ***********************************
 def main():
     
@@ -35,8 +33,10 @@ def main():
  
     #solo para ver como se genera la lista
     imprimir_resumen_goles(lista_equipos, goles_a_favor,goles_en_contra)
+    
+    puntos=calcular_puntos (fixture, lista_equipos, goles_a_favor)
 
- 
+    imprimir_tabla_ordenada(lista_equipos,puntos)
 
   
 # **************************** LLAMADO A FUNCION MAIN **************************

@@ -1,74 +1,78 @@
 
-
-
 def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
     """
-    Calcula los puntos, goles a favor y goles en contra de cada equipo
-    y los devuelve en una lista de listas.
+    Calcula solo los puntos de cada equipo y los devuelve en una lista.
     """
     num_equipos = len(equipos)
-    # Inicializamos la lista principal con listas vacías.
-    datos_puntos = [[0, 0, 0] for _ in range(num_equipos)]
-    # Formato: [puntos, goles_a_favor, goles_en_contra]
 
-    for fecha_num, fecha in enumerate(fixture):
-        for equipo1, equipo2 in fecha:
+    # Creamos una lista para almacenar los puntos de cada equipo.
+    puntos = []
+    # Usamos 'i' como una variable simple de conteo.
+    for i in range(num_equipos):
+        puntos.append(0)
+
+    # Recorremos cada fecha del torneo.
+    for fecha_num in range(len(fixture)):
+        fecha = fixture[fecha_num]
+
+        # Recorremos cada partido en la fecha.
+        for partido in fecha:
+            equipo1 = partido[0]
+            equipo2 = partido[1]
+
+            # Obtenemos los índices de los equipos.
             idx1 = equipos.index(equipo1)
             idx2 = equipos.index(equipo2)
-            
+
+            # Obtenemos los goles anotados por cada equipo en el partido actual.
             goles_eq1 = matriz_goles_a_favor[idx1][fecha_num]
             goles_eq2 = matriz_goles_a_favor[idx2][fecha_num]
-            
-            # Asignación de puntos
+
+            # Asignamos los puntos basados en el resultado.
             if goles_eq1 > goles_eq2:
-                datos_puntos[idx1][0] += 3
+                puntos[idx1] += 3  # Victoria: 3 puntos
             elif goles_eq2 > goles_eq1:
-                datos_puntos[idx2][0] += 3
+                puntos[idx2] += 3  # Victoria: 3 puntos
             else:
-                datos_puntos[idx1][0] += 1
-                datos_puntos[idx2][0] += 1
-                
-            # Goles a favor y en contra
-            datos_puntos[idx1][1] += goles_eq1
-            datos_puntos[idx1][2] += goles_eq2
-            datos_puntos[idx2][1] += goles_eq2
-            datos_puntos[idx2][2] += goles_eq1
+                puntos[idx1] += 1  # Empate: 1 punto
+                puntos[idx2] += 1  # Empate: 1 punto
 
-    return datos_puntos
+    return puntos
 
 
+def imprimir_tabla_ordenada(equipos, puntos):
 
+    # Paso 1: Combinar equipos y puntos para un ordenamiento más sencillo.
+    # Se crea una lista de listas, donde cada sublista es [puntos, nombre_equipo].
+    tabla = []
+    for i in range(len(equipos)):
+        tabla.append([puntos[i], equipos[i]])
 
-def imprimir_tabla(equipos, datos_completos):
-    """
-    Ordena e imprime la tabla de posiciones.
-    """
-    n = len(datos_completos)
-    
-    # Algoritmo de ordenamiento para ordenar la lista de listas.
-    # El nombre del equipo (índice 3) se usa para poder imprimirlo.
+    # Paso 2: Ordenar la lista 'tabla'
+    # Se usa el algoritmo de ordenamiento de burbuja para ordenar por puntos de mayor a menor.
+    n = len(tabla)
     for i in range(n - 1):
         for j in range(n - 1 - i):
-            # Criterio principal: puntos (índice 0)
-            if datos_completos[j][0] < datos_completos[j+1][0]:
-                datos_completos[j], datos_completos[j+1] = datos_completos[j+1], datos_completos[j]
-            # Criterio de desempate: diferencia de gol (índice 3)
-            elif datos_completos[j][0] == datos_completos[j+1][0] and datos_completos[j][3] < datos_completos[j+1][3]:
-                datos_completos[j], datos_completos[j+1] = datos_completos[j+1], datos_completos[j]
-
-    # Imprimir la tabla ya ordenada
-    print("\n" + f"{'--- TABLA DE POSICIONES ---':^37}")
-    print(f"{'Equipo':^20}  {'Puntos':^6}  {'Dif. Gol':^8}")
+            if tabla[j][0] < tabla[j+1][0]:
+                tabla[j], tabla[j+1] = tabla[j+1], tabla[j]
     
-    for i in range(len(equipos)):
-        puntos_eq = datos_completos[i][0]
-        dif_gol_eq = datos_completos[i][3]
-        print(f"{equipos[i][:20]:^20}  {puntos_eq:^6}  {dif_gol_eq:^8}")
-
-    # Mensaje al campeón
-    campeon = equipos[0]
-    puntos_campeon = datos_completos[0][0]
-    dif_gol_campeon = datos_completos[0][3]
+    # Paso 3: Imprimir la tabla de posiciones
+    print("\n" + "--- TABLA DE POSICIONES ---".center(40))
+    print("-" * 40)
+    print(f"{'Pos.':<5} {'Equipo':<20} {'Puntos':>10}")
+    print("-" * 40)
+    
+    # Se recorre la lista ya ordenada y se imprime cada fila de la tabla.
+    for i in range(len(tabla)):
+        posicion = i + 1
+        equipo = tabla[i][1]
+        puntos_eq = tabla[i][0]
+        print(f"{posicion:<5} {equipo:<20} {puntos_eq:>10}")
+    print("-" * 40)
+    
+    # Paso 4: Imprimir al campeón y su puntuación
+    campeon = tabla[0][1]
+    puntos_campeon = tabla[0][0]
     
     print("\n¡FELICITACIONES", campeon.upper(), "!!!")
-    print(f"Se consagra campeón con {puntos_campeon} puntos y una diferencia de gol de {dif_gol_campeon}.")
+    print(f"Se consagra campeón con {puntos_campeon} puntos.")
