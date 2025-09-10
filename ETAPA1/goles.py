@@ -17,34 +17,6 @@ def inicializar_matriz_resultados():
         matriz.append([0] * NUMERO_FECHAS)
     return matriz
 
-def generar_fixture(equipos):
-    """
-    Genera el fixture de un campeonato todos contra todos (round-robin)
-    con 20 equipos y 19 fechas, usando listas.
-    """
-    if len(equipos) != 20:
-        print("Error: Se requieren exactamente 20 equipos.")
-        return []
-
-    n = len(equipos)
-    fixture = []
-
-    for ronda in range(n - 1):
-        fecha = []
-        for i in range(n // 2):
-            equipo_local = equipos[i]
-            equipo_visitante = equipos[n - 1 - i]
-
-            if ronda % 2 == 0:
-                fecha.append([equipo_local, equipo_visitante])
-            else:
-                fecha.append([equipo_visitante, equipo_local])
-
-        fixture.append(fecha)
-        equipos = [equipos[0]] + [equipos[-1]] + equipos[1:-1]
-
-    return fixture
-
 def simular_torneo(fixture, equipos):
     """
     Simula todos los partidos del torneo y guarda los goles a favor.
