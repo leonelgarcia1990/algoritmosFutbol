@@ -157,20 +157,13 @@ def imprimir_matriz_contra(matriz, equipos):
         print()
     print()
 
-def imprimir_resumen_goles(equipos, matriz_goles_a_favor, goles_en_contra):
-     
-    #Imprime el resumen de goles por equipo.
-    ancho_total = 50
-    titulo = '--- RESUMEN DE GOLES POR EQUIPO ---'
-    print("\n" + titulo.center(ancho_total))
-    print("-" * ancho_total)
-    print(f"{'Equipo':<15} {'Goles Favor':>15} {'Goles Contra':>15} {'Dif. Gol':>12}")
-    print("-" * ancho_total)
-    
-    for i in range(len(equipos)):
-        equipo = equipos[i]
-        total_a_favor = sum(matriz_goles_a_favor[i])
-        total_en_contra = sum(matriz_goles_en_contra[i])
-        diferencia_gol = total_a_favor - total_en_contra
-        print(f"{equipo:<15} {total_a_favor:>15} {total_en_contra:>15} {diferencia_gol:>12}")
-    print("-" * ancho_total)
+def imprimir_resumen_goles(lista_equipos, goles_a_favor, goles_en_contra):
+    print("       --- RESUMEN DE GOLES POR EQUIPO ---        ")
+    print("--------------------------------------------------")
+    print("Equipo              Goles Favor    Goles Contra     Dif. Gol")
+    print("--------------------------------------------------")
+    for i in range(len(lista_equipos)):
+        total_a_favor = sum(goles_a_favor[i])
+        total_en_contra = sum(goles_en_contra[i])
+        diferencia = total_a_favor - total_en_contra
+        print(f"{lista_equipos[i]:<20}{total_a_favor:<14}{total_en_contra:<16}{diferencia}")
