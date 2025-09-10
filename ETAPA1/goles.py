@@ -55,11 +55,15 @@ def simular_torneo(fixture, equipos):
 
     ANCHO_TOTAL = 40
 
-    for fecha_num, fecha in enumerate(fixture):
+    for fecha_num in range(len(fixture)):
+        fecha = fixture[fecha_num]
         titulo = f" FECHA {fecha_num + 1} ".center(ANCHO_TOTAL, "-")
         print("\n" + titulo)
 
-        for equipo1, equipo2 in fecha:
+        for partido in fecha:
+            equipo1 = partido[0]
+            equipo2 = partido[1]
+            
             goles1 = simular_goles()
             goles2 = simular_goles()
 
@@ -87,7 +91,8 @@ def calcular_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
     for fecha_num in range(num_fechas):
         fecha = fixture[fecha_num]
         for partido in fecha:
-            equipo_local, equipo_visitante = partido
+            equipo_local = partido[0]
+            equipo_visitante = partido[1]
             
             idx1 = equipos.index(equipo_local)
             idx2 = equipos.index(equipo_visitante)
@@ -103,6 +108,7 @@ def calcular_goles_en_contra(fixture, equipos, matriz_goles_a_favor):
 def calcular_diferencia_de_goles(equipos, matriz_goles_a_favor, goles_en_contra):
     """
     Calcula la diferencia de goles para cada equipo.
+    Retorna una lista con las diferencias en el mismo orden que los equipos.
     """
     diferencia_goles = []
 
@@ -115,44 +121,46 @@ def calcular_diferencia_de_goles(equipos, matriz_goles_a_favor, goles_en_contra)
         
     return diferencia_goles
 
-def imprimir_matriz_favor(matriz, equipos):
-    """
-    Imprime una matriz de goles a favor con etiquetas de equipo y fecha.
-    """
-    print("\n" + "--- GOLES A FAVOR ---".center(50))
-    print("           ", end="")
-    for i in range(NUMERO_FECHAS):
-        print(f"Fecha{i+1:2d}", end=" ")
-    print()
+# def imprimir_matriz_favor(matriz, equipos):
+#     """
+#     Imprime una matriz de goles a favor con etiquetas de equipo y fecha.
+#     """
+#     print("\n" + "--- GOLES A FAVOR ---".center(50))
+#     print("           ", end="")
+#     for i in range(NUMERO_FECHAS):
+#         print(f"Fecha{i+1:2d}", end=" ")
+#     print()
     
-    for i in range(NUMERO_EQUIPOS):
-        nombre_equipo = equipos[i]
-        print(f"{nombre_equipo:<10}", end="")
-        for j in range(NUMERO_FECHAS):
-            print(f"{matriz[i][j]:>7}", end=" ")
-        print()
-    print()
+#     for i in range(NUMERO_EQUIPOS):
+#         nombre_equipo = equipos[i]
+#         print(f"{nombre_equipo:<10}", end="")
+#         for j in range(NUMERO_FECHAS):
+#             print(f"{matriz[i][j]:>7}", end=" ")
+#         print()
+#     print()
 
-def imprimir_matriz_contra(matriz, equipos):
-    """
-    Imprime una matriz de goles en contra con etiquetas de equipo y fecha.
-    """
-    print("\n" + "--- GOLES EN CONTRA ---".center(50))
-    print("           ", end="")
-    for i in range(NUMERO_FECHAS):
-        print(f"Fecha{i+1:2d}", end=" ")
-    print()
+# def imprimir_matriz_contra(matriz, equipos):
+#     """
+#     Imprime una matriz de goles en contra con etiquetas de equipo y fecha.
+#     """
+#     print("\n" + "--- GOLES EN CONTRA ---".center(50))
+#     print("           ", end="")
+#     for i in range(NUMERO_FECHAS):
+#         print(f"Fecha{i+1:2d}", end=" ")
+#     print()
     
-    for i in range(NUMERO_EQUIPOS):
-        nombre_equipo = equipos[i]
-        print(f"{nombre_equipo:<10}", end="")
-        for j in range(NUMERO_FECHAS):
-            print(f"{matriz[i][j]:>7}", end=" ")
-        print()
-    print()
+#     for i in range(NUMERO_EQUIPOS):
+#         nombre_equipo = equipos[i]
+#         print(f"{nombre_equipo:<10}", end="")
+#         for j in range(NUMERO_FECHAS):
+#             print(f"{matriz[i][j]:>7}", end=" ")
+#         print()
+#     print()
 
 def imprimir_resumen_goles(lista_equipos, goles_a_favor, goles_en_contra):
-   
+    """
+    Imprime un resumen de goles por equipo sin usar tuplas.
+    """
     ancho_total = 60 
     titulo = '--- RESUMEN DE GOLES POR EQUIPO ---'
     print("\n" + titulo.center(ancho_total))
@@ -162,7 +170,6 @@ def imprimir_resumen_goles(lista_equipos, goles_a_favor, goles_en_contra):
 
     for i in range(len(lista_equipos)):
         equipo = lista_equipos[i]
-
         gf_total = sum(goles_a_favor[i])
         gc_total = sum(goles_en_contra[i])
         dif_gol = gf_total - gc_total
