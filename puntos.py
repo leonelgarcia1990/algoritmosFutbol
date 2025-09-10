@@ -1,8 +1,8 @@
 
 def calcular_puntos(fixture, equipos, matriz_goles_a_favor):
-    """
-    Calcula solo los puntos de cada equipo y los devuelve en una lista.
-    """
+    
+   # Calcula solo los puntos de cada equipo y los devuelve en una lista.
+    
     num_equipos = len(equipos)
 
     # Creamos una lista para almacenar los puntos de cada equipo.

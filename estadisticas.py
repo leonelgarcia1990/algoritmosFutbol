@@ -1,15 +1,7 @@
 def obtener_equipos_mas_goleadores(equipos, matriz_goles_a_favor, top_n=5):
-    """
-    Obtiene los equipos con más goles a favor.
 
-    Args:
-        equipos (list): La lista de equipos del torneo.
-        matriz_goles_a_favor (list): La matriz con los goles a favor.
-        top_n (int): Número de equipos a incluir en el ranking (default: 5).
+  #  Obtiene los equipos con más goles a favor.
 
-    Returns:
-        list: Lista de tuplas (equipo, total_goles) ordenada de mayor a menor.
-    """
     equipos_goles = []
     
     for i, equipo in enumerate(equipos):
@@ -23,17 +15,9 @@ def obtener_equipos_mas_goleadores(equipos, matriz_goles_a_favor, top_n=5):
 
 
 def obtener_equipos_menos_goleados(equipos, matriz_goles_en_contra, top_n=5):
-    """
-    Obtiene los equipos que recibieron menos goles (mejor defensa).
+    
+   # Obtiene los equipos que recibieron menos goles (mejor defensa).
 
-    Args:
-        equipos (list): La lista de equipos del torneo.
-        matriz_goles_en_contra (list): La matriz con los goles en contra.
-        top_n (int): Número de equipos a incluir en el ranking (default: 5).
-
-    Returns:
-        list: Lista de tuplas (equipo, total_goles_recibidos) ordenada de menor a mayor.
-    """
     equipos_goles_contra = []
     
     for i, equipo in enumerate(equipos):
@@ -47,18 +31,9 @@ def obtener_equipos_menos_goleados(equipos, matriz_goles_en_contra, top_n=5):
 
 
 def obtener_equipos_mejor_diferencia(equipos, matriz_goles_a_favor, matriz_goles_en_contra, top_n=5):
-    """
-    Obtiene los equipos con mejor diferencia de goles.
 
-    Args:
-        equipos (list): La lista de equipos del torneo.
-        matriz_goles_a_favor (list): La matriz con los goles a favor.
-        matriz_goles_en_contra (list): La matriz con los goles en contra.
-        top_n (int): Número de equipos a incluir en el ranking (default: 5).
+   # Obtiene los equipos con mejor diferencia de goles.
 
-    Returns:
-        list: Lista de tuplas (equipo, diferencia_goles) ordenada de mayor a menor.
-    """
     equipos_diferencia = []
     
     for i, equipo in enumerate(equipos):
@@ -74,9 +49,9 @@ def obtener_equipos_mejor_diferencia(equipos, matriz_goles_a_favor, matriz_goles
 
 
 def imprimir_rankings(equipos, matriz_goles_a_favor, matriz_goles_en_contra):
-    """
-    Imprime los diferentes rankings de equipos.
-    """
+
+   # Imprime los diferentes rankings de equipos.
+
     ancho_total = 50
     
     # Ranking de goleadores
