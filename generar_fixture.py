@@ -1,6 +1,7 @@
+
 def generar_fixture(equipos):
     """
-    Genera el fixture de un campeonato todos contra todos 
+    Genera el fixture de un campeonato todos contra todos (round-robin)
     con 20 equipos y 19 fechas.
     
     - Cada equipo juega contra todos los demás una sola vez.
@@ -15,24 +16,24 @@ def generar_fixture(equipos):
         return []
 
     n = len(equipos)
-    fixture = []  # Lista que contendrá las 19 fechas
+    fixture = []
 
-    # Algoritmo round-robin (rotación de equipos)
-    for ronda in range(n - 1):  # Se generan 19 fechas
+    for ronda in range(n - 1):
         fecha = []
         for i in range(n // 2):
+            #creacion de dos listas una para local y visitante
             equipo_local = equipos[i]
             equipo_visitante = equipos[n - 1 - i]
-
-            # En cada ronda, alternamos quién es local/visitante
+            
+            #local y visitante alternado las fechas    
             if ronda % 2 == 0:
-                fecha.append((equipo_local, equipo_visitante))
+                fecha.append([equipo_local, equipo_visitante])
             else:
-                fecha.append((equipo_visitante, equipo_local))
+                fecha.append([equipo_visitante, equipo_local])
 
         fixture.append(fecha)
 
-        # Rotar los equipos (menos el primero que queda fijo)
+        #creacion de una nueva lista rontando los equipos para que no se repitan las fechas. 
         equipos = [equipos[0]] + [equipos[-1]] + equipos[1:-1]
 
     return fixture
