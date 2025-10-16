@@ -1,3 +1,4 @@
+#sacar los return del medio.
 def validar_y_agregar_equipo(equipos, nombre):
     if len(nombre.strip()) == 0:
         print("¡Error! El nombre del equipo no puede estar vacío. Intenta de nuevo.")
@@ -5,7 +6,7 @@ def validar_y_agregar_equipo(equipos, nombre):
 
     nombre_normalizado = " ".join(nombre.strip().split())
     caracteres_permitidos = "áéíóúüñÁÉÍÓÚÜÑ.-'"
-    
+#cambiar por while  
     for char in nombre_normalizado:
         if (char.isalpha() == False) and (char in caracteres_permitidos == False) and (char.isspace() == False):
             print(f" ¡Error! El nombre contiene caracteres no permitidos: '{char}'. Intenta de nuevo.")
