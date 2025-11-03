@@ -1,0 +1,56 @@
+ESTADISTICAS GENERALES
+Estadistica,Valor
+Equipo con mas goles a favor,Argentinos Juniors
+Cantidad de goles a favor,58
+Equipo con menos goles en contra,Platense
+Cantidad de goles en contra,33
+Equipo con mejor diferencia de gol,Talleres
+Diferencia de gol,22
+Partido con mas goles totales,10
+Maximo de goles de un equipo,5
+
+GOLES POR EQUIPO
+Equipo,Goles_Favor
+Boca Juniors,41
+Platense,42
+River Plate,48
+Arsenal,45
+Racing Club,48
+Godoy Cruz,44
+Independiente,45
+Union,44
+San Lorenzo,49
+Colon,51
+Estudiantes,35
+Huracan,51
+Velez Varsfield,37
+Lanus,51
+Argentinos Juniors,58
+Banfield,45
+Rosario Central,55
+Talleres,58
+Newells Old Boys,45
+Gimnasia La Plata,39
+
+GOLES POR FECHA
+Fecha,Total_Goles
+1,49
+2,43
+3,51
+4,49
+5,37
+6,45
+7,57
+8,54
+9,48
+10,48
+11,42
+12,36
+13,42
+14,56
+15,59
+16,66
+17,48
+18,49
+19,52
+

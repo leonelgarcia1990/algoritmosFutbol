@@ -1,0 +1,3 @@
+=== Sistema iniciado ===
+Login exitoso - Usuario: admin
+Usuario salio del sistema
